@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
+import { CartProvider } from "@/components/CartContext";
+import CartLink from "@/components/CartLink";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,10 +16,119 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body style={{ fontFamily: "Arial, Helvetica, system-ui, sans-serif" }}>
+        <CartProvider>
+          <header
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 80,
+              background: "rgba(0,0,0,0.25)",
+              borderBottom: "1px solid rgba(255,255,255,0.12)",
+              color: "#f5f5f5",
+              backdropFilter: "blur(8px)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 16,
+                maxWidth: 1000,
+                margin: "0 auto",
+                padding: "16px 24px",
+              }}
+            >
+              <Link
+                href="/"
+                style={{ fontWeight: 700, textDecoration: "none", color: "inherit" }}
+              >
+                My Shop
+              </Link>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  flexWrap: "wrap",
+                }}
+              >
+                <nav style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                  <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+                    Αρχική
+                  </Link>
+                  <Link
+                    href="/categories"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Προϊόντα
+                  </Link>
+                  <Link
+                    href="/about"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Σχετικά
+                  </Link>
+                  <Link
+                    href="/contact"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Επικοινωνία
+                  </Link>
+                </nav>
+                <CartLink />
+              </div>
+            </div>
+          </header>
+          <main style={{ maxWidth: 1000, margin: "0 auto", padding: "24px" }}>
+            {children}
+          </main>
+          <footer
+            style={{
+              borderTop: "1px solid rgba(255,255,255,0.12)",
+              color: "#f5f5f5",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 16,
+                maxWidth: 1000,
+                margin: "0 auto",
+                padding: "16px 24px",
+                flexWrap: "wrap",
+              }}
+            >
+              <div>© 2026 My Shop</div>
+              <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+                  Αρχική
+                </Link>
+                <Link
+                  href="/categories"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Προϊόντα
+                </Link>
+                <Link
+                  href="/about"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Σχετικά
+                </Link>
+                <Link
+                  href="/contact"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Επικοινωνία
+                </Link>
+              </div>
+            </div>
+          </footer>
+        </CartProvider>
       </body>
     </html>
   );
