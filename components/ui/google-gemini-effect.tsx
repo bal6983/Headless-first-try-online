@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { motion, type MotionValue } from "framer-motion";
+import { motion, type MotionValue, type Easing } from "framer-motion";
 import React from "react";
+
+const easeInOut: Easing = [0.42, 0, 0.58, 1];
 
 const transition = {
   duration: 0,
-  ease: [0.42, 0, 0.58, 1],
+  ease: easeInOut,
 };
 
 export const GoogleGeminiEffect = ({
